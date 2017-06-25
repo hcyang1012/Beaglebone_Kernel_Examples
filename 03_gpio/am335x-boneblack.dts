@@ -1,0 +1,62 @@
+/*
+ * Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com/
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+/dts-v1/;
+
+#include "am33xx.dtsi"
+#include "am335x-bone-common.dtsi"
+#include "am335x-boneblack-common.dtsi"
+/* #include "am335x-bone-jtag.dtsi" */
+
+/ {
+	model = "TI AM335x BeagleBone Black";
+	compatible = "ti,am335x-bone-black", "ti,am335x-bone", "ti,am33xx";
+
+
+/*
+*   Node for my_dev
+*/
+    my_dev{
+        /*
+        * Pinmux
+        */
+		pinctrl-names = "default";
+		pinctrl-0 = <&my_dev_led0>;
+
+        compatible = "my_dev";
+
+        /*
+        * A child node for gpio (connected to a led)
+        */
+		led0 {
+
+			label = "my_dev_led0";
+
+			gpios = <&gpio0 30 GPIO_ACTIVE_HIGH>;
+		};
+
+    };
+};
+
+&am33xx_pinmux{
+	my_dev_led0: my_dev_led0 {
+		pinctrl-single,pins = <
+			AM33XX_IOPAD(0x870, PIN_OUTPUT_PULLDOWN | MUX_MODE7)	/* gpmc_wait0.gpio0_30 */
+		>;
+	};
+};
+
+&cpu0_opp_table {
+	/*
+	 * All PG 2.0 silicon may not support 1GHz but some of the early
+	 * BeagleBone Blacks have PG 2.0 silicon which is guaranteed
+	 * to support 1GHz OPP so enable it for PG 2.0 on this board.
+	 */
+	oppnitro@1000000000 {
+		opp-supported-hw = <0x06 0x0100>;
+	};
+};
