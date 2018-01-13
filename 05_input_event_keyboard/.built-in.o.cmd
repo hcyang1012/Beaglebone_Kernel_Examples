@@ -1,1 +1,0 @@
-cmd_/var/lib/cloud9/work/Beaglebone_Kernel_Examples/05_input_event_keyboard/built-in.o :=  rm -f /var/lib/cloud9/work/Beaglebone_Kernel_Examples/05_input_event_keyboard/built-in.o; ar rcsD /var/lib/cloud9/work/Beaglebone_Kernel_Examples/05_input_event_keyboard/built-in.o

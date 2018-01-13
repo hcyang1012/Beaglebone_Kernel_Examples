@@ -1,2 +1,0 @@
-/var/lib/cloud9/work/Beaglebone_Kernel_Examples/05_input_event_keyboard/05_input_event_keyboard.ko
-/var/lib/cloud9/work/Beaglebone_Kernel_Examples/05_input_event_keyboard/05_input_event_keyboard.o
