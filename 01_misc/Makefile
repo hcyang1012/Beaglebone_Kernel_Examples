@@ -1,12 +1,13 @@
 obj-m += 01_misc.o
-KDIR := $(KERNEL_DIR)
-PWD := $(shell pwd)
-
-CC := $(CROSS_COMPILE)gcc
+SRC := $(shell pwd)
 
 all:
-	$(MAKE) -C $(KDIR) M=$(shell pwd) modules
+	$(MAKE) -C $(KERNEL_SRC) M=$(SRC)
+
+modules_install:
+	$(MAKE) -C $(KERNEL_SRC) M=$(SRC) modules_install
 
 clean:
-	-$(MAKE) -C $(KDIR) M=${shell pwd} clean || true
-	-rm *.o *.ko *.mod.c *.mod.o modules.order Module.symvers || true
+	rm -f *.o *~ core .depend .*.cmd *.ko *.mod.c
+	rm -f Module.markers Module.symvers modules.order
+	rm -rf .tmp_versions Modules.symvers
